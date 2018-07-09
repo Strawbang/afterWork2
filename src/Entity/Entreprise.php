@@ -41,7 +41,6 @@ class Entreprise{
     private $description;
 
 
-
     /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="id")
      */
@@ -49,9 +48,10 @@ class Entreprise{
 
 
 
-
-
-
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
 
 
     /**

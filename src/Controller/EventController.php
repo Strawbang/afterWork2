@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Groupe;
 use App\Entity\Message;
@@ -27,10 +28,19 @@ class EventController extends Controller
 {
 
 
-    public function indexAction()
+    public function indexAction(Groupe $groupe)
     {
+
+
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $event = $entityManager->getRepository(Event::class)->findBy(array('groupe' => $groupe), null,5);
+
+
         return $this->render('Event/calendar.html.twig', array(
-            'idgroupe' => '1',
+            'idgroupe' => $groupe->getIdGroupe(),
+            'event' => $event,
         ));
     }
 
@@ -46,12 +56,12 @@ class EventController extends Controller
 
             $event = $formEvent->getData();
             $event->setGroupe($groupe);
-
+            $event->setUseradd($this->getUser()->getId());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('event_add', array('groupe' => $groupe->getIdGroupe()));
+            return $this->redirectToRoute(' event_show', array('groupe' => $groupe->getIdGroupe()));
         }
 
 
@@ -72,23 +82,33 @@ class EventController extends Controller
         ));
 
         $form->add("titre", TextType::class, array('label' => false))
-            ->add("message", TextType::class, array('label' => false))
+            ->add("message", TextareaType::class, array('label' => false))
             ->add("adress", TextType::class, array('label' => false))
             ->add('datedebut', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'input' => 'datetime',
-                'format' => 'dd/MM/yyyy',
+                'format' => 'dd/MM/yyyy - HH:mm',
                 'label' => false))
 
             ->add("datefin", DateTimeType::class, array(
                 'widget' => 'single_text',
                 'input' => 'datetime',
-                'format' => 'dd/MM/yyyy',
+                'format' => 'dd/MM/yyyy - HH:mm',
                 'label' => false))
             ->add('submit', SubmitType::class, array('label' => 'Envoyer'));
 
 
         return $form->getForm();
+    }
+
+
+    public function detailAction(Event $event)
+    {
+
+
+        return $this->render('Event/detail.html.twig', array(
+            'event' => $event,
+        ));
     }
 
 }

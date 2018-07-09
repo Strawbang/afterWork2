@@ -19,12 +19,11 @@ class EntrepriseType extends AbstractType {
      * Chaque champ devant figurer dans l'interface web est défini ici.
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+
         $builder
-            ->add('nom', TextType::class, array(
-                'label' => 'Nom',
-                'attr' => array('style' => 'width: 50px'),
+            ->add('nom', TextType::class, array('label' => false
             ))
-            ->add('description', TextareaType::class,array('label' => 'Description'))
+            ->add('description', TextareaType::class,array('label' => false))
             ->add('submit', SubmitType::class, array('label' => 'Cree')
 
             );

@@ -68,6 +68,29 @@ class Event
     private $groupe;
 
     /**
+     * @ORM\Column(type="integer", name="user_add")
+     */
+    private $useradd;
+
+    /**
+     * @return mixed
+     */
+    public function getUseradd()
+    {
+        return $this->useradd;
+    }
+
+    /**
+     * @param mixed $useradd
+     */
+    public function setUseradd($useradd)
+    {
+        $this->useradd = $useradd;
+    }
+
+
+
+    /**
      * @return mixed
      */
     public function getId()

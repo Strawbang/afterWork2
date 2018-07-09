@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\FOSUserBundle;
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as FOSUser;
 
 /**
@@ -32,9 +33,25 @@ class User extends FOSUser
     /**
      * @var int
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\UserGroupe", mappedBy="User", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\UserGroupe", mappedBy="User", orphanRemoval=false)
      */
     protected $relationsUserGroupe;
+
+    /**
+     * @return int
+     */
+    public function getRelationsUserGroupe()
+    {
+        return $this->relationsUserGroupe;
+    }
+
+    /**
+     * @param $relationsUserGroupe
+     */
+    public function setRelationsUserGroupe($relationsUserGroupe)
+    {
+        $this->relationsUserGroupe = $relationsUserGroupe;
+    }
 
 
     public function getIdUserGroupe(): ?int

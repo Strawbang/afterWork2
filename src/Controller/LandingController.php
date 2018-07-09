@@ -21,8 +21,17 @@ class LandingController extends Controller
     {
 
 
-
         return $this->render('Landing/index.html.twig', array(
+            'toto' => 'lol',
+        ));
+    }
+
+    public function contributingAction()
+    {
+
+
+
+        return $this->render('Landing/contribution.html.twig', array(
             'toto' => 'lol',
         ));
     }
