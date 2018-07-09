@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12 text-center">
                                 <div class="body">
-                                    <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="{{ groupes }}" data-speed="2000" data-fresh-interval="700">2501</h2>
+                                    <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="{{ nbgroupes }}" data-speed="2000" data-fresh-interval="700">2501</h2>
                                     <p class="text-muted ">Nombres de groupes</p>
                                     <span id="linecustom2">2,9,5,5,8,5,4,2,6</span>
                                 </div>
@@ -64,7 +64,7 @@
                                 <li class="col-lg-3 col-md-3 col-6">
                                     <div class="body">
                                         <i class="zmdi zmdi-thumb-up col-blue"></i>
-                                        <h4>{{ groupes }}</h4>
+                                        <h4>{{ nbgroupes }}</h4>
                                         <span>groupes</span>
                                     </div>
                                 </li>
@@ -92,7 +92,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2><strong>Members</strong> Profiles <small>Members Preformance / Monthly Status</small> </h2>
+                        <h2><strong>Members</strong> Profiles <small></small> </h2>
                         <ul class="header-dropdown">
                             <li class="remove">
                                 <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
@@ -105,26 +105,18 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>email</th>
-                                    <th>entreprise</th>                                    
-                                    <th>Groupes</th>
-                                    <th>Evenements</th>
+                                    <th>entreprise</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for user in tabUsers %}
+                                {% for user in users %}
                                 <tr>
-                                    <td>{{ user['username'] }}</td>
-                                    <td>{{ user['email'] }}</td>
-                                    <td>{{ user['entreprise'] }}</td>                                   
-                                    <td>
-                                        Nb
-                                    </td>
-                                        <td>
-                                            nb
-                                    </td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.entreprise }}</td>
                                 </tr>
                                 {% endfor %}
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -152,13 +144,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for groupe in tabGroupe %}
+                                {% for groupe in groupes %}
                                 <tr>
-                                    <td>{{ groupe['nom'] }}</td>
-                                    <td>nb</td>                                 
+                                    <td>{{ groupe.nom }}</td>
+                                    <td>nb</td>
                                 </tr>
                                 {% endfor %}
-                                
+
                             </tbody>
                         </table>
                     </div>

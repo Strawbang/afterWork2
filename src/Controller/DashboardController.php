@@ -35,56 +35,35 @@ class DashboardController extends Controller
         $User = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
         $allusers = $entityManager->getRepository(User::class)->findAll();
-
         $allGroupes = $entityManager->getRepository(Groupe::class)->findAll();
         $allEvents = $entityManager->getRepository(Event::class)->findAll();
         $allEntreprises = $entityManager->getRepository(Entreprise::class)->findAll();
         $allMessages = $entityManager->getRepository(Message::class)->findAll();
 
 
-        // PS TA PAS BESION DE FAIRE DE BOUCLE MAIS JUSTE UN COUNT
 
-        $countUser = 0;
-        $tabUsers = [];
-         foreach ($allusers as $user) {
-            $countUser ++;
-            $tabUsers[$countUser]['username'] = $user->getUsername();
-            $tabUsers[$countUser]['email'] = $user->getEmail();
-            //$tabUsers[$countUser]['entreprise'] = $user->getEntreprise();
-            $tabUsers[$countUser]['entreprise'] = 'test';
-         }
 
-        $countGroupe = 0;
-        $tabGroupe = [];
-        foreach ($allGroupes as $groupe) {
-            $countGroupe ++;
-            $tabGroupe[$countGroupe]['nom'] = $groupe->getNom();            
-         } 
 
-        $countEvent = 0;
-        foreach ($allEvents as $event) {
-            $countEvent ++;
-         } 
 
-        $countEntreprises = 0;
-        foreach ($allEntreprises as $Entreprise) {
-            $countEntreprises ++;
-         } 
+        $countUser = count($allusers);
+        $countEvent = count($allEvents);
+        $countGroupe = count($allGroupes);
+        $countEntreprises = count($allEntreprises);
+        $countMessages =count($allMessages);
 
-        $countMessages = 0;
-        foreach ($allMessages as $Messages) {
-            $countMessages ++;
-         } 
+
+
+
+
 
         return $this->render('Dashboard/index.html.twig', array(
             'count' => $countUser,
-            'groupes' => $countGroupe,
+            'nbgroupes' => $countGroupe,
             'events' => $countEvent,
             'Messages' => $countMessages,
             'Entreprise' => $countEntreprises,
-            'tabUsers' => $tabUsers,
-            'tabGroupe' => $tabGroupe
-
+            'users' => $allusers,
+            'groupes' => $allGroupes
         ));
 
     }
